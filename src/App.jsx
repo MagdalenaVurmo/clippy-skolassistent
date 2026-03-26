@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import { NavLink, Outlet, useLocation, Link } from "react-router-dom";
 import Layout from "./components/Layout.jsx";
 import AuthPage from "./pages/AuthPage.jsx";
+import ClippyAssistant from "./components/ClippyAssistant";
 
-// Enkel “riktig” ikon (SVG)
+// Enkel ikon för meddelanden
 function BellIcon({ size = 18 }) {
   return (
     <svg
@@ -24,7 +25,6 @@ function BellIcon({ size = 18 }) {
 export default function App() {
   const [user, setUser] = useState(null);
 
-  // Exempeldata för meddelanden (senaste överst)
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -60,21 +60,23 @@ export default function App() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const location = useLocation();
 
-  // Stäng dropdown när man byter sida
   useEffect(() => {
     setIsDropdownOpen(false);
   }, [location.pathname]);
 
-  function handleAuthenticate(username) {
-    setUser({ username });
+  function handleAuthenticate(userData) {
+    setUser(userData);
   }
 
-  // Markera alla som lästa (används när man öppnar /meddelanden)
+  function handleLogout() {
+    localStorage.removeItem("token");
+    setUser(null);
+  }
+
   function markAllAsRead() {
     setMessages((prev) => prev.map((m) => ({ ...m, unread: false })));
   }
 
-  // Om inte inloggad → visa bara login/registrering
   if (!user) {
     return <AuthPage onAuthenticate={handleAuthenticate} />;
   }
@@ -93,12 +95,11 @@ export default function App() {
           <NavLink to="/kurser">Mina Kurser</NavLink>
           <NavLink to="/kontakt">Kontakta lärare</NavLink>
 
-          {/* Meddelanden med ikon + badge + dropdown */}
           <div className="nav-messages-wrap">
             <button
               type="button"
               className="nav-messages-btn"
-              onClick={() => setIsDropdownOpen((v) => !v)}
+              onClick={() => setIsDropdownOpen((prev) => !prev)}
               aria-haspopup="menu"
               aria-expanded={isDropdownOpen}
             >
@@ -131,13 +132,24 @@ export default function App() {
                         m.unread ? "is-unread" : ""
                       }`}
                     >
-                      <Link to="/meddelanden" className="messages-dropdown__link">
+                      <Link
+                        to="/meddelanden"
+                        className="messages-dropdown__link"
+                      >
                         <div className="messages-dropdown__top">
-                          <span className="messages-dropdown__from">{m.from}</span>
-                          <span className="messages-dropdown__date">{m.date}</span>
+                          <span className="messages-dropdown__from">
+                            {m.from}
+                          </span>
+                          <span className="messages-dropdown__date">
+                            {m.date}
+                          </span>
                         </div>
-                        <div className="messages-dropdown__subject">{m.subject}</div>
-                        <div className="messages-dropdown__preview">{m.preview}</div>
+                        <div className="messages-dropdown__subject">
+                          {m.subject}
+                        </div>
+                        <div className="messages-dropdown__preview">
+                          {m.preview}
+                        </div>
                       </Link>
                     </li>
                   ))}
@@ -147,7 +159,7 @@ export default function App() {
                   <button
                     type="button"
                     className="messages-dropdown__markread"
-                    onClick={() => markAllAsRead()}
+                    onClick={markAllAsRead}
                   >
                     Markera alla som lästa
                   </button>
@@ -155,13 +167,22 @@ export default function App() {
               </div>
             )}
           </div>
+
+          <button
+            type="button"
+            className="logout-btn"
+            onClick={handleLogout}
+          >
+            Logga ut
+          </button>
         </nav>
       </header>
 
       <main className="app-main">
-        {/* Skicka meddelanden + funktioner till dina pages via Outlet */}
-        <Outlet context={{ messages, setMessages, markAllAsRead }} />
+        <Outlet context={{ messages, setMessages, markAllAsRead, user }} />
       </main>
+
+      <ClippyAssistant />
     </Layout>
   );
 }

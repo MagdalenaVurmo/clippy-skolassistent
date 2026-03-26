@@ -1,23 +1,63 @@
-// src/pages/AuthPage.jsx
+import axios from "axios";
+
 export default function AuthPage({ onAuthenticate }) {
-  function handleSignup(e) {
+  async function handleSignup(e) {
     e.preventDefault();
+
     const formData = new FormData(e.target);
-    const username = formData.get("signup-username") || "Elev";
-    onAuthenticate(username);
+
+    const username = formData.get("signup-username");
+    const email = formData.get("signup-email");
+    const password = formData.get("signup-password");
+    const confirmPassword = formData.get("signup-confirm");
+
+    if (password !== confirmPassword) {
+      alert("Lösenorden matchar inte");
+      return;
+    }
+
+    try {
+      const res = await axios.post("http://localhost:5000/api/auth/register", {
+        username,
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", res.data.token);
+      onAuthenticate(res.data.user);
+    } catch (error) {
+      console.error("REGISTER error:", error.response?.data || error.message);
+      alert(error.response?.data?.message || "Fel vid registrering");
+    }
   }
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
+
     const formData = new FormData(e.target);
-    const username = formData.get("login-username") || "Elev";
-    onAuthenticate(username);
+
+    const username = formData.get("login-username");
+    const password = formData.get("login-password");
+
+    try {
+      const res = await axios.post("http://localhost:5000/api/auth/login", {
+        username,
+        password,
+      });
+
+      localStorage.setItem("token", res.data.token);
+      onAuthenticate(res.data.user);
+    } catch (error) {
+      console.error("LOGIN error:", error.response?.data || error.message);
+      alert(error.response?.data?.message || "Fel vid inloggning");
+    }
   }
 
   return (
     <div className="auth">
       <div className="auth__card auth__card--signup">
         <h2>Sign Up</h2>
+
         <form onSubmit={handleSignup} className="auth__form">
           <div className="auth__field">
             <span className="auth__icon">👤</span>
@@ -28,6 +68,7 @@ export default function AuthPage({ onAuthenticate }) {
               required
             />
           </div>
+
           <div className="auth__field">
             <span className="auth__icon">📧</span>
             <input
@@ -37,6 +78,7 @@ export default function AuthPage({ onAuthenticate }) {
               required
             />
           </div>
+
           <div className="auth__field">
             <span className="auth__icon">🔒</span>
             <input
@@ -46,6 +88,7 @@ export default function AuthPage({ onAuthenticate }) {
               required
             />
           </div>
+
           <div className="auth__field">
             <span className="auth__icon">🔒</span>
             <input
@@ -59,15 +102,12 @@ export default function AuthPage({ onAuthenticate }) {
           <button type="submit" className="auth__button">
             Create Account
           </button>
-
-          <p className="auth__text">
-            Already a member? <span className="auth__link">Log in</span>
-          </p>
         </form>
       </div>
 
       <div className="auth__card auth__card--signin">
         <h2>Sign in</h2>
+
         <form onSubmit={handleLogin} className="auth__form">
           <div className="auth__field">
             <span className="auth__icon">👤</span>
@@ -78,6 +118,7 @@ export default function AuthPage({ onAuthenticate }) {
               required
             />
           </div>
+
           <div className="auth__field">
             <span className="auth__icon">🔒</span>
             <input
@@ -91,11 +132,6 @@ export default function AuthPage({ onAuthenticate }) {
           <button type="submit" className="auth__button">
             Login
           </button>
-
-          <p className="auth__text">
-            Not registered?{" "}
-            <span className="auth__link">Create an account</span>
-          </p>
         </form>
       </div>
     </div>

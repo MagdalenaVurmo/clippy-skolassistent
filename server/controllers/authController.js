@@ -52,22 +52,23 @@ const registerUser = async (req, res) => {
   }
 };
 
-// POST /api/auth/login
+// Logga in användare
+
 const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    if (!email || !password) {
+    if (!username || !password) {
       return res.status(400).json({
-        message: "E-post och lösenord krävs",
+        message: "Username och lösenord krävs",
       });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ username });
 
     if (!user) {
       return res.status(401).json({
-        message: "Felaktig e-post eller lösenord",
+        message: "Felaktigt username eller lösenord",
       });
     }
 
@@ -75,7 +76,7 @@ const loginUser = async (req, res) => {
 
     if (!isMatch) {
       return res.status(401).json({
-        message: "Felaktig e-post eller lösenord",
+        message: "Felaktigt username eller lösenord",
       });
     }
 

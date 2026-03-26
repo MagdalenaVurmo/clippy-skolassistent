@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const CLIPPY_MESSAGES = [
   { type: "plain", text: "Behöver du hjälp med något? Jag finns här! 🤓" },
@@ -26,6 +26,7 @@ export default function ClippyAssistant() {
   const [message, setMessage] = useState(getRandomItem(CLIPPY_MESSAGES));
   const [joke, setJoke] = useState("");
   const [hasAnsweredJoke, setHasAnsweredJoke] = useState(false);
+  const [eyePos, setEyePos] = useState({ x: 0, y: 0 });
 
   function toggleOpen() {
     setIsOpen((prev) => !prev);
@@ -40,6 +41,7 @@ export default function ClippyAssistant() {
 
   function handleJokeAnswer(wantsJoke) {
     setHasAnsweredJoke(true);
+
     if (wantsJoke) {
       setJoke(getRandomItem(JOKES));
     } else {
@@ -47,11 +49,21 @@ export default function ClippyAssistant() {
     }
   }
 
+  useEffect(() => {
+    function handleMouseMove(e) {
+      const x = (e.clientX / window.innerWidth - 0.5) * 8;
+      const y = (e.clientY / window.innerHeight - 0.5) * 8;
+      setEyePos({ x, y });
+    }
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   const isAskJoke = message.type === "askJoke";
 
   return (
     <div className="clippy">
-      {/* BUBBLA */}
       <div className={`clippy__bubble ${isOpen ? "" : "is-hidden"}`}>
         <div className="clippy__bubble-arrow" />
 
@@ -69,6 +81,7 @@ export default function ClippyAssistant() {
                 >
                   Ja, gärna!
                 </button>
+
                 <button
                   className="clippy__btn"
                   onClick={() => handleJokeAnswer(false)}
@@ -78,8 +91,6 @@ export default function ClippyAssistant() {
               </>
             )}
 
-            {/* Visa “Ny hälsning” när det inte är skämt-fråga,
-                eller efter att skämtet är besvarat */}
             {(!isAskJoke || hasAnsweredJoke) && (
               <button
                 className="clippy__btn clippy__btn--primary"
@@ -92,23 +103,33 @@ export default function ClippyAssistant() {
         </div>
       </div>
 
-      {/* SJÄLVA CLIPPY-KROPPEN */}
       <div className="clippy__body">
-        <div className="clippy__wire" />
-        <div className="clippy__loop clippy__loop--top" />
-        <div className="clippy__loop clippy__loop--bottom" />
+        <div className="clippy__clip clippy__clip--outer" />
+        <div className="clippy__clip clippy__clip--inner" />
 
         <div className="clippy__face">
-          <div className="clippy__eye clippy__eye--left">
-            <div className="clippy__pupil" />
+          <div className="clippy__eye">
+            <div
+              className="clippy__pupil"
+              style={{
+                left: `calc(50% + ${eyePos.x}px)`,
+                top: `calc(50% + ${eyePos.y}px)`,
+              }}
+            />
           </div>
-          <div className="clippy__eye clippy__eye--right">
-            <div className="clippy__pupil" />
+
+          <div className="clippy__eye">
+            <div
+              className="clippy__pupil"
+              style={{
+                left: `calc(50% + ${eyePos.x}px)`,
+                top: `calc(50% + ${eyePos.y}px)`,
+              }}
+            />
           </div>
         </div>
       </div>
 
-      {/* KNAPP FÖR ATT VISA/GÖMMA BUBBLAN */}
       <button className="clippy__toggle" onClick={toggleOpen}>
         💬
       </button>
