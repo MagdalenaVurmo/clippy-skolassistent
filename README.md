@@ -1,76 +1,67 @@
+# 🎓 Clippy Skolassistent
 
-Här är mitt Examens Arbete för Javascriptsutvecklare på Folkuniversitetet i Göteborg.
-
-# 🎓 Clippy – Din skolassistent
-
-En Single Page Application byggd i React där elever kan få en överblick över sin skolvardag. Applikationen innehåller en interaktiv assistent inspirerad av Clippy som hjälper och peppar användaren.
+En elevportal byggd i React där studenter kan hantera kurser, kommunicera med lärare och få hjälp av en interaktiv assistent (Clippy).
 
 ---
 
-## 📌 Om projektet
+## 🚀 Funktioner
 
-Detta projekt är ett proof-of-concept för en elevportal där skolinformation samlas på ett och samma ställe. Syftet är att göra det enklare för elever att hålla koll på sina studier samtidigt som användarupplevelsen görs mer engagerande genom en interaktiv assistent.
-
----
-
-## ✨ Funktionalitet
-
-- 🔐 Inloggningssida (frontend)
-- 🧷 Interaktiv assistent (Clippy)
-  - Ger uppmuntrande meddelanden
-  - Kan berätta skämt
-  - Visar och döljer sig via knapp
-- 📅 Kommande examinationer
-- 📚 Läxor med deadlines
-- 📄 Skolmaterial
-- 🎥 Skolvideos
-- 📧 Kontakt med lärare (mail-länkar)
-
----
-
-## 🧠 Clippy
-
-Clippy är inspirerad av Microsofts tidigare digitala assistent och används i projektet som en interaktiv figur som guidar och motiverar användaren. Målet är att skapa en mer personlig och engagerande upplevelse.
+- 🔐 Inloggning & registrering (med backend och MongoDB)
+- 📚 Kurssida med:
+  - Uppgifter
+  - Schema
+  - Skolmaterial
+  - Videos
+  - Examinationer & läxor
+- 💬 Meddelandesystem mellan elev och lärare
+  - Chat med historik
+  - Skicka och svara på meddelanden
+- 🔔 Notifikationer för nya meddelanden
+- 🤖 Clippy-assistent som:
+  - Ger tips
+  - Ställer frågor
+  - Berättar skämt
+- 🎨 Responsiv och modern UI (SASS)
 
 ---
 
 ## 🛠️ Tekniker
 
-- React (SPA)
+### Frontend
+- React
 - React Router
-- JavaScript (ES6+)
-- SASS (modulär styling)
-- CSS-animationer
-- Git & GitHub
+- Axios
+- SASS / SCSS
+
+### Backend
+- Node.js
+- Express
+- MongoDB Atlas
+- JWT (autentisering)
 
 ---
 
-## 📂 Projektstruktur
+## 🧠 Arkitektur
 
-src/
-components/
-ClippyAssistant.jsx
-Layout.jsx
+Applikationen är byggd som en fullstack-lösning:
 
-pages/
-HomePage.jsx
-TipsPage.jsx
-FavoritesPage.jsx
-AboutPage.jsx
-AuthPage.jsx
+- **Frontend (React)** hanterar UI och routing
+- **Backend (Express)** hanterar API och autentisering
+- **MongoDB** används som databas
+- State hanteras med React hooks
 
-data/
-schoolData.js
+---
 
-styles/
-main.scss
-_clippy.scss
-_layout.scss
-_pages.scss
-_auth.scss
+## 💡 Funktionell design
 
+- Navigation mellan sidor med React Router
+- Dynamiska komponenter (meddelanden, kurser)
+- UI-feedback (notiser, hover-effekter)
+- Interaktiv assistent (Clippy)
 
-## 🚀 Kom igång
+---
+
+## 📦 Installation
 
 ### 1. Klona projektet
 
