@@ -1,34 +1,96 @@
-import { useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useState } from "react";
+import { useOutletContext, useNavigate } from "react-router-dom";
+import "../styles/MessagePage.scss";
 
-export default function MeddelandenPage() {
-  const { messages, markAllAsRead } = useOutletContext();
+export default function MessagePage() {
+  const { messages, setMessages } = useOutletContext();
+  const [activeChat, setActiveChat] = useState(null);
+  const [input, setInput] = useState("");
+  const navigate = useNavigate();
 
-  // När sidan öppnas → markera alla som lästa
-  useEffect(() => {
-    markAllAsRead();
-  }, [markAllAsRead]);
+  function openChat(chat) {
+    setActiveChat(chat);
+  }
+
+  function sendMessage() {
+    if (!input.trim()) return;
+
+    setMessages((prev) =>
+      prev.map((chat) =>
+        chat.id === activeChat.id
+          ? {
+              ...chat,
+              messages: [
+                ...chat.messages,
+                { from: "me", text: input, date: "Nu" },
+              ],
+            }
+          : chat
+      )
+    );
+
+    setInput("");
+  }
 
   return (
-    <section className="page">
-      <h2>Meddelanden</h2>
+    <div className="messages-page">
 
-      {messages.length === 0 ? (
-        <p>Inga meddelanden just nu.</p>
-      ) : (
-        <ul className="messages-list">
-          {messages.map((m) => (
-            <li key={m.id} className={`messages-list__item ${m.unread ? "is-unread" : ""}`}>
-              <div className="messages-list__top">
-                <strong>{m.from}</strong>
-                <span className="messages-list__date">{m.date}</span>
-              </div>
-              <div className="messages-list__subject">{m.subject}</div>
-              <div className="messages-list__preview">{m.preview}</div>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
+      {/* ❌ STÄNG-KNAPP */}
+      <button
+        className="close-btn"
+        onClick={() => navigate("/")}
+      >
+        ✕
+      </button>
+
+      {/* SIDEBAR */}
+      <div className="messages-sidebar">
+        <h3>Lärare</h3>
+
+        {messages.map((chat) => (
+          <div
+            key={chat.id}
+            className="chat-card"
+            onClick={() => openChat(chat)}
+          >
+            <strong>{chat.teacher}</strong>
+            <p>{chat.messages[chat.messages.length - 1].text}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* CHAT */}
+      <div className="messages-chat">
+        {!activeChat ? (
+          <p>Välj en konversation</p>
+        ) : (
+          <>
+            <h3>{activeChat.teacher}</h3>
+
+            <div className="chat-box">
+              {activeChat.messages.map((msg, i) => (
+                <div
+                  key={i}
+                  className={`chat-message ${
+                    msg.from === "me" ? "me" : "teacher"
+                  }`}
+                >
+                  {msg.text}
+                </div>
+              ))}
+            </div>
+
+            <div className="chat-input">
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Skriv meddelande..."
+              />
+              <button onClick={sendMessage}>Skicka</button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
   );
 }

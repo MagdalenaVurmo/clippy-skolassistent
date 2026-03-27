@@ -1,4 +1,3 @@
-// src/pages/HomePage.jsx
 import ClippyAssistant from "../components/ClippyAssistant.jsx";
 
 import {

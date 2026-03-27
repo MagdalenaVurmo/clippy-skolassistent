@@ -2,11 +2,12 @@
 @use "./clippy";
 @use "./layout";
 @use "./pages";
+@use "./MessagePage";
 
 
 body {
   margin: 0;
-  background: #f3f4f6;
+  background: #dbd1da;
   font-family: system-ui, sans-serif;
 }
 
@@ -19,16 +20,28 @@ body {
   margin-top: .5rem;
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 3rem;
+  background-color: #dbd1da;
+  font-weight: 800;
 
   a {
     text-decoration: none;
-    padding: 6px 12px;
+    padding: 18px 13px;
     border-radius: 20px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #e8c9f9;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
 
     &.active {
-      background: #4f46e5;
-      color: white;
+      background: #d28bf3;
+      color: rgb(17, 16, 16);
+      font-weight: 900;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transform: translateY(-1px);
     }
   }
 }
@@ -37,4 +50,84 @@ body {
   max-width: 900px;
   margin: 0 auto;
   padding: 1rem;
+}
+
+.nav-messages-wrap {
+  position: relative;
+}
+
+.nav-messages-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 800;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #e8c9f9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  &.has-notifications .nav-ico {
+    color: #ef4444;
+  }
+}
+
+.nav-ico {
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.message-badge {
+  background: #ef4444;
+  color: white;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  margin-left: 4px;
+}
+
+.message-tooltip {
+  position: absolute;
+  top: -32px;
+  right: 0;
+  background: #111;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+.nav-messages-btn.has-notifications:hover .message-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+.nav-messages-link.has-notifications .nav-ico svg {
+  fill: #ef4444 !important;
+}
+
+.nav-messages-link.has-notifications {
+  color: #ef4444;
+}
+.nav-messages-link.has-notifications .nav-ico {
+  animation: bellPulse 1.5s infinite;
+}
+
+@keyframes bellPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }

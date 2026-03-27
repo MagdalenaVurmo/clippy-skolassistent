@@ -10,6 +10,7 @@ import MessagePage from "./pages/MessagePage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 
 import "./styles/main.scss";
+import "./styles/MessagePage.scss";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

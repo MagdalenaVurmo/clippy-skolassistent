@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const CLIPPY_MESSAGES = [
-  { type: "plain", text: "Behöver du hjälp med något? Jag finns här! 🤓" },
+  { type: "plain", text: "HEJ! Jag är Clippy! Behöver du hjälp med något? Jag finns här! 🤓" },
   { type: "plain", text: "Vilken underbar dag det är idag. ☀️" },
   { type: "plain", text: "Du är bäst! Vet du det? 💪" },
   {

@@ -2,24 +2,56 @@
 .nav-messages-wrap {
   position: relative;
   display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.nav-messages-btn {
+.nav-messages-link {
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 800;
+  transition: all 0.2s ease;
+}
+
+.nav-messages-link:hover {
+  background: #e8c9f9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.nav-messages-link.active {
+  background: #d28bf3;
+  color: rgb(17, 16, 16);
+  font-weight: 900;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transform: translateY(-1px);
+}
+
+.nav-messages-link.has-notifications,
+.nav-messages-link.has-notifications .nav-ico,
+.nav-messages-link.has-notifications .nav-ico svg {
+  color: #ef4444;
+  fill: #ef4444;
+}
+
+.nav-messages-toggle {
   border: none;
   background: transparent;
   cursor: pointer;
-  font: inherit;
-  color: inherit;
-  padding: 6px 10px;
+  padding: 6px 8px;
   border-radius: 10px;
+  font-size: 14px;
+  transition: all 0.2s ease;
 }
 
-.nav-messages-btn:hover {
-  background: rgba(0,0,0,0.06);
+.nav-messages-toggle:hover {
+  background: #e8c9f9;
 }
 
 .nav-ico {
@@ -44,7 +76,6 @@
   color: #fff;
 }
 
-/* Liten “pulse” animation */
 .message-badge--pulse {
   animation: badgePulse 1.6s infinite;
 }
@@ -53,6 +84,27 @@
   0% { transform: scale(1); }
   50% { transform: scale(1.12); }
   100% { transform: scale(1); }
+}
+
+.message-tooltip {
+  position: absolute;
+  top: -32px;
+  right: 0;
+  background: #111;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+.nav-messages-link.has-notifications:hover .message-tooltip {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Dropdown */
@@ -132,11 +184,9 @@
 .messages-dropdown__preview {
   font-size: 0.9rem;
   opacity: 0.85;
-
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-
   overflow: hidden;
 }
 

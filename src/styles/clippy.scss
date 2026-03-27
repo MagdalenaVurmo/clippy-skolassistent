@@ -52,8 +52,8 @@ $clippy-color: #b8ccf1;
   &__clip--outer {
     inset: 0;
     border: 7px solid $clippy-color;
-    border-left-color: transparent;
-    border-bottom-color: transparent;
+    border-left-color: 7px solid $clippy-color;
+    border-bottom-color: 7px solid $clippy-color;
     box-shadow: 0 4px 8px $clippy-shadow;
   }
 
@@ -63,8 +63,8 @@ $clippy-color: #b8ccf1;
     width: 46px;
     height: 92px;
     border: 5px solid lighten($clippy-color, 6%);
-    border-left-color: transparent;
-    border-bottom-color: transparent;
+    border-left-color: 5px solid lighten($clippy-color, 6%);
+    border-bottom-color: 5px solid lighten($clippy-color, 6%);
   }
 
   &__face {
@@ -79,7 +79,7 @@ $clippy-color: #b8ccf1;
   &__eye {
     width: 22px;
     height: 22px;
-    background: #fffef9;
+    background: #f3f2ee;
     border-radius: 50%;
     border: 2px solid #555c6b;
     overflow: hidden;
@@ -90,7 +90,7 @@ $clippy-color: #b8ccf1;
     position: absolute;
     width: 10px;
     height: 10px;
-    background: #1b2559;
+    background: #0f1f6e;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     animation: clippy-blink 4s infinite;
