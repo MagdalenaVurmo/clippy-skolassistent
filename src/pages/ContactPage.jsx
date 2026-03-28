@@ -1,9 +1,12 @@
 import { useOutletContext } from "react-router-dom";
 import "../styles/ContactPage.scss";
 
+// KONTAKTSIDAN! 
+//Här ska man kunna man kunna kontaktasin lärare och se derras kontaktuppgifter.
+
 export default function AboutPage() {
   const teachers = [
-    {
+    { // Lärare 1
       id: 1,
       name: "Anna Andersson",
       subject: "Programmering 1",
@@ -13,7 +16,7 @@ export default function AboutPage() {
       skype: "anna.andersson",
     },
     {
-      id: 2,
+      id: 2, // Lärare 2
       name: "Björn Berg",
       subject: "Databaser",
       phone: "070-987 65 43",
@@ -22,7 +25,7 @@ export default function AboutPage() {
       skype: "bjorn.berg",
     },
     {
-      id: 3,
+      id: 3, // Lärare 3
       name: "Sara Svensson",
       subject: "HTML & CSS",
       phone: "070-555 44 33",

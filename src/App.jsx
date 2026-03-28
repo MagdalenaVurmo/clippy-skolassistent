@@ -161,8 +161,10 @@ export default function App() {
           );
         })}
       </ul>
+        
+        /* Om det finns fler än 3 konversationer, visa en knapp för att markera alla som lästa */
 
-      <div className="messages-dropdown__footer">
+      <div className="messages-dropdown__footer"> 
         <button
           type="button"
           className="messages-dropdown__markread"

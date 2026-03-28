@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default function AuthPage({ onAuthenticate }) {
+export default function AuthPage({ onAuthenticate }) { 
   async function handleSignup(e) {
     e.preventDefault();
 
@@ -17,7 +17,7 @@ export default function AuthPage({ onAuthenticate }) {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", {
+      const res = await axios.post("http://localhost:5000/api/auth/register", { // Skicka användaruppgifter till backend för kunna REGISTRERA SIG HÄR!.
         username,
         email,
         password,
@@ -31,7 +31,7 @@ export default function AuthPage({ onAuthenticate }) {
     }
   }
 
-  async function handleLogin(e) {
+  async function handleLogin(e) { // Skicka användaruppgifter till backend för kunna LOGGA IN HÄR.
     e.preventDefault();
 
     const formData = new FormData(e.target);

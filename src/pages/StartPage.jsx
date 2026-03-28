@@ -8,6 +8,9 @@ import {
   teachers,
 } from "../data/schoolData.js";
 
+// STARTSIDAN!
+// Här ska man se en översikt över alltihop som tex sina kommande examinationer, läxor, material och videos.
+
 export default function HomePage() {
   return (
     <section className="page home dashboard">

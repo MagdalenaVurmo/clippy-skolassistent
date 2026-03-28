@@ -4,6 +4,12 @@ import { useNavigate } from "react-router-dom";
 export default function KurserPage() {
   const navigate = useNavigate();
 
+
+
+  // KURSERNA
+  // Här visas alla kurser som eleven är anmäld till. 
+  // För varje kurs visas uppgifter, schema, skolmaterial, skolvideos, examinationer och även läxor.
+  
   const courses = [
     {
       id: 1,

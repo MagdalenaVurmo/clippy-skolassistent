@@ -2,6 +2,11 @@ import { useState } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
 import "../styles/MessagePage.scss";
 
+
+// Meddelandesidan!
+// Här ska man kunna se alla sina konversationer med lärarna 
+// OCH även kunna skicka nya meddelanden till sin lärare.
+
 export default function MessagePage() {
   const { messages, setMessages } = useOutletContext();
   const [activeChat, setActiveChat] = useState(null);

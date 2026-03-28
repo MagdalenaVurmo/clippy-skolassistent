@@ -72,6 +72,11 @@ git clone https://github.com/ditt-användarnamn/clippy-skolassistent.git
 npm install
 
 3. Starta projektet
+(BACKEND)
+cd server
+npm run dev
+
+(FRONTEND)
 npm run dev
 
 Öppna i webbläsaren:
