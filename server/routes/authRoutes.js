@@ -1,3 +1,5 @@
+// Routes för autentisering (registrering och inloggning)
+
 const express = require("express");
 const { registerUser, loginUser } = require("../controllers/authController");
 

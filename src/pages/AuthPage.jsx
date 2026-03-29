@@ -1,5 +1,7 @@
 import axios from "axios";
 
+// Denna komponent hanterar registrering och inloggning av användare.
+
 export default function AuthPage({ onAuthenticate }) { 
   async function handleSignup(e) {
     e.preventDefault();

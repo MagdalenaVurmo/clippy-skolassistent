@@ -8,7 +8,7 @@ const createToken = (userId) => {
   });
 };
 
-// POST /api/auth/register
+// POST /api/auth/register - Registrera en ny användare
 const registerUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -18,7 +18,7 @@ const registerUser = async (req, res) => {
         message: "Alla fält måste fyllas i",
       });
     }
-
+      // Kontrollera om användaren redan finns
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -26,15 +26,16 @@ const registerUser = async (req, res) => {
         message: "En användare med den här e-postadressen finns redan",
       });
     }
-
+    // Hasha lösenordet innan det sparas i databasen
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Skapa den nya användaren i databasen
     const user = await User.create({
       username,
       email,
       password: hashedPassword,
     });
-
+    // Skicka tillbaka en token och användarinformation (utan lösenord förstås) OBS! Vid lyckad registrering
     res.status(201).json({
       message: "Användare skapad",
       token: createToken(user._id),
@@ -45,7 +46,7 @@ const registerUser = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(500).json({ // Vid fel så visas detta message här nedanför.
       message: "Något gick fel vid registrering",
       error: error.message,
     });
@@ -63,7 +64,7 @@ const loginUser = async (req, res) => {
         message: "Username och lösenord krävs",
       });
     }
-
+    
     const user = await User.findOne({ username });
 
     if (!user) {

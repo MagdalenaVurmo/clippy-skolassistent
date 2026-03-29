@@ -1,5 +1,5 @@
-// src/data/schoolData.js
 
+// Här visas examinationer för eleven på startsidan,
 export const exams = [
   {
     id: 1,
@@ -24,6 +24,7 @@ export const exams = [
   },
 ];
 
+// Här visas läxor för eleven på startsidan.
 export const homework = [
   {
     id: 1,
@@ -44,7 +45,7 @@ export const homework = [
     dueDate: "2025-01-20",
   },
 ];
-
+// Här visas material (på startsidan) som tex pdf:er och länkar.
 export const materials = [
   {
     id: 1,
@@ -66,6 +67,7 @@ export const materials = [
   },
 ];
 
+// Här visas videor som eleven kan titta på (på startsidan).
 export const videos = [
   {
     id: 1,
@@ -87,6 +89,7 @@ export const videos = [
   },
 ];
 
+// Här visas lärarna som eleven har (på startsidan).
 export const teachers = [
   {
     id: 1,
