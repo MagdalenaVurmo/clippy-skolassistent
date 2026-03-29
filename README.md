@@ -4,7 +4,7 @@ En elevportal byggd i React där studenter kan hantera kurser, kommunicera med l
 
 ---
 
-## 🚀 Funktioner
+## 🚀 Funktioner 🚀
 
 - 🔐 Inloggning & registrering (med backend och MongoDB)
 - 📚 Kurssida med:
@@ -25,7 +25,7 @@ En elevportal byggd i React där studenter kan hantera kurser, kommunicera med l
 
 ---
 
-## 🛠️ Tekniker
+## 🛠️ Tekniker 🛠️
 
 ### Frontend
 - React
@@ -41,7 +41,7 @@ En elevportal byggd i React där studenter kan hantera kurser, kommunicera med l
 
 ---
 
-## 🧠 Arkitektur
+## 🧠 Arkitektur 🧠
 
 Applikationen är byggd som en fullstack-lösning:
 
@@ -52,7 +52,7 @@ Applikationen är byggd som en fullstack-lösning:
 
 ---
 
-## 💡 Funktionell design
+## 💡 Funktionell design 💡
 
 - Navigation mellan sidor med React Router
 - Dynamiska komponenter (meddelanden, kurser)
@@ -61,7 +61,7 @@ Applikationen är byggd som en fullstack-lösning:
 
 ---
 
-## 📦 Installation
+## 📦 Installation 📦
 
 ### 1. Klona projektet
 
