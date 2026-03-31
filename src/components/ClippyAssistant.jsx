@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 
-
-
-const CLIPPY_MESSAGES = [ // Olika hälsningar och meddelanden som Clippy visar
-  { type: "plain", text: "HEJ! Jag är Clippy! Behöver du hjälp med något? Jag finns här! 🤓" },
+const CLIPPY_MESSAGES = [
+  { type: "plain", text: "Behöver du hjälp med något? Jag finns här! 🤓" },
   { type: "plain", text: "Vilken underbar dag det är idag. ☀️" },
   { type: "plain", text: "Du är bäst! Vet du det? 💪" },
   {
@@ -13,7 +11,7 @@ const CLIPPY_MESSAGES = [ // Olika hälsningar och meddelanden som Clippy visar
   { type: "askJoke", text: "Vill du höra ett skämt? 😏" },
 ];
 
-const JOKES = [ // Skämt som Clippy säger när användaren vill läsa ett skämt.
+const JOKES = [
   "Varför tog eleven med sig en stege till skolan? För att gå i högstadiet! 😆",
   "Vad sa datorn till eleven? Du har för många fönster öppna, ta en paus! 💻",
   "Varför älskar programmerare kaffe? För att de inte gillar sleep-läge. ☕",
@@ -105,29 +103,33 @@ export default function ClippyAssistant() {
         </div>
       </div>
 
-      <div className="clippy__body">
-        <div className="clippy__clip clippy__clip--outer" />
-        <div className="clippy__clip clippy__clip--inner" />
+      <div className="clippy__stage">
+        <div className="clippy__shadow" />
 
-        <div className="clippy__face">
-          <div className="clippy__eye">
-            <div
-              className="clippy__pupil"
-              style={{
-                left: `calc(50% + ${eyePos.x}px)`,
-                top: `calc(50% + ${eyePos.y}px)`,
-              }}
-            />
-          </div>
+        <div className="clippy__body">
+          <div className="clippy__clip clippy__clip--outer" />
+          <div className="clippy__clip clippy__clip--inner" />
 
-          <div className="clippy__eye">
-            <div
-              className="clippy__pupil"
-              style={{
-                left: `calc(50% + ${eyePos.x}px)`,
-                top: `calc(50% + ${eyePos.y}px)`,
-              }}
-            />
+          <div className="clippy__face">
+            <div className="clippy__eye">
+              <div
+                className="clippy__pupil"
+                style={{
+                  left: `calc(50% + ${eyePos.x}px)`,
+                  top: `calc(50% + ${eyePos.y}px)`,
+                }}
+              />
+            </div>
+
+            <div className="clippy__eye">
+              <div
+                className="clippy__pupil"
+                style={{
+                  left: `calc(50% + ${eyePos.x}px)`,
+                  top: `calc(50% + ${eyePos.y}px)`,
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
