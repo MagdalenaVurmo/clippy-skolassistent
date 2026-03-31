@@ -50,7 +50,7 @@ $clippy-color: #254ade;
     height: 170px;
   }
 
-  &__shadow {
+  &__shadow { // Skugga för clipppy
     position: absolute;
     left: 25%;
     bottom: -50px;
@@ -63,7 +63,7 @@ $clippy-color: #254ade;
     animation: clippy-shadow 4s ease-in-out infinite;
   }
 
-  &__body {
+  &__body { // Clippys kropp
     position: absolute;
     left: -10px;
     bottom: 12px;
@@ -73,11 +73,20 @@ $clippy-color: #254ade;
     z-index: 1;
   }
 
-  &__clip {
+  &__clip { //
     position: absolute;
     border-radius: 999px;
     transform: rotate(20deg);
     box-sizing: border-box;
+     background:
+    repeating-linear-gradient(
+      to bottom,
+      #d1c49e,
+      #a09b8b 13px,
+      #e3e3e3 19px
+    );
+
+  border: 2px solid rgba(0,0,0,0.05);
   }
 
   &__clip--outer {
@@ -86,13 +95,15 @@ $clippy-color: #254ade;
     border-left-color: $clippy-color;
     border-bottom-color: $clippy-color;
     box-shadow: 0 4px 8px $clippy-shadow;
+    width: 100px;
+  height: 170px;
   }
 
   &__clip--inner {
     top: 24px;
     left: 28px;
-    width: 46px;
-    height: 92px;
+    width: 45px;
+    height: 115px;
     border: 5px solid lighten($clippy-color, 6%);
     border-left-color: $clippy-color;
     border-bottom-color: $clippy-color;
@@ -107,7 +118,7 @@ $clippy-color: #254ade;
     z-index: 2;
   }
 
-  &__eye {
+  &__eye { 
     position: relative;
     width: 22px;
     height: 22px;
